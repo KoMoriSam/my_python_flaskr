@@ -27,16 +27,16 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/hello')
     def hello():
-        return 'Hello, World!'
-
-    return app
-
-
-def create_app():
-    app = ...
-    # existing code omitted
+        return '要是你就是不相信的话，我们换个别的'
 
     from . import db
     db.init_app(app)
+
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
